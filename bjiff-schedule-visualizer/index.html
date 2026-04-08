@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>北京国际电影节展映排片</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="masthead">
+        <p class="brand-mark">BJIFF 2026</p>
+        <div class="masthead-meta">
+          <span>北京展映排片可视化</span>
+          <span id="generatedAt"></span>
+        </div>
+      </header>
+
+      <header class="hero">
+        <div class="hero-copy panel">
+          <p class="eyebrow">Beijing International Film Festival 2026</p>
+          <h1>像流媒体首页一样选北影节片单。</h1>
+          <p class="hero-text">
+            不是 Excel 翻页，而是按展映气质、日期、影院和放映密度来浏览。先看精选，再看完整片单；封面、简介和评分会优先补豆瓣信息，抓不到时再回退成电影节感的文字海报。
+          </p>
+          <div class="hero-actions">
+            <label class="search">
+              <span>搜索电影 / 英文名 / 导演回顾单元 / 影院</span>
+              <input id="searchInput" type="search" placeholder="比如：穆赫兰道、Herzog、英皇电影城" />
+            </label>
+            <div class="hero-pills" id="heroPills"></div>
+          </div>
+        </div>
+
+        <aside class="hero-stage panel">
+          <section>
+            <div class="section-heading">
+              <div>
+                <p class="section-label">Festival Snapshot</p>
+                <h2>本届展映总览</h2>
+              </div>
+            </div>
+            <div class="hero-stats" id="heroStats"></div>
+          </section>
+
+          <section class="hero-spotlight">
+            <div class="section-heading">
+              <div>
+                <p class="section-label">Editor’s Picks</p>
+                <h2>本页精选</h2>
+              </div>
+            </div>
+            <div class="spotlight-stack" id="spotlightStack"></div>
+          </section>
+        </aside>
+      </header>
+
+      <main class="content">
+        <section class="insight-strip" id="insightStrip"></section>
+
+        <section class="browse-layout">
+          <aside class="filter-sidebar panel">
+            <div class="filter-header">
+              <p class="section-label">Filter Panel</p>
+              <h2>筛选片单</h2>
+              <p class="filter-note">左侧先定日期和看点，再慢慢收窄到具体单元；长单元列表会留在栏内滚动，不再压住正文。</p>
+            </div>
+            <section class="filter-bar">
+              <div class="filter-group">
+                <span class="filter-label">日期</span>
+                <div class="chips chips-vertical" id="dateChips"></div>
+              </div>
+              <div class="filter-group filter-group-unit">
+                <span class="filter-label">单元</span>
+                <div class="chips" id="unitChips"></div>
+              </div>
+              <div class="filter-group">
+                <span class="filter-label">排序</span>
+                <div class="chips chips-vertical" id="sortChips"></div>
+              </div>
+              <div class="filter-group">
+                <span class="filter-label">看点</span>
+                <div class="chips chips-vertical" id="focusChips"></div>
+              </div>
+            </section>
+          </aside>
+
+          <div class="browse-main">
+            <section class="results-meta">
+              <div>
+                <p class="section-label">Browse All Films</p>
+                <h2 id="resultsTitle">全部影片</h2>
+              </div>
+              <p id="resultsSummary"></p>
+            </section>
+            <section class="active-filter-strip" id="activeFilterStrip"></section>
+
+            <section class="featured-grid" id="featuredGrid"></section>
+            <section class="card-grid" id="cardGrid"></section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <template id="filmCardTemplate">
+      <article class="film-card">
+        <div class="poster-slot">
+          <div class="poster-fallback">
+            <span class="poster-unit"></span>
+            <h3 class="poster-title"></h3>
+            <p class="poster-english"></p>
+          </div>
+          <img class="poster-image" alt="" loading="lazy" hidden />
+        </div>
+        <div class="film-body">
+          <div class="film-heading">
+            <div>
+              <p class="unit-tag"></p>
+              <h3 class="film-title"></h3>
+              <p class="film-subtitle"></p>
+              <p class="film-synopsis"></p>
+            </div>
+            <div class="card-badges">
+              <span class="rating-badge" hidden></span>
+              <span class="creator-badge" hidden>主创映后</span>
+              <span class="immersive-badge" hidden>Immersive</span>
+            </div>
+          </div>
+          <div class="next-session"></div>
+          <div class="meta-row"></div>
+          <div class="notes"></div>
+          <div class="screening-list"></div>
+        </div>
+      </article>
+    </template>
+
+    <script src="./data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
